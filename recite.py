@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
+import argparse
 import csv
 import random
-import argparse
 
 parser = argparse.ArgumentParser(description="recite")
 parser.add_argument("-a", dest="a", default=0, type=int, help="begin")
@@ -32,7 +32,11 @@ while len(data) > 0:
     for idx, row in enumerate(data):
         word = row[0]
         chinese = row[1]
-        english = row[2]
+        try:
+            english = row[2]
+        except IndexError:
+            english = ""
+            
         ipt = input("\033[1;34;48m%03d \033[0m %s: " % (idx + 1, word))
         if ipt.lower() in ["exit", "quit"]:
             exit()
